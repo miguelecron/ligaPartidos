@@ -9,13 +9,16 @@ import java.nio.Buffer;
 public class App {
 
     public static final String DELIMITADOR = "::";
+    private static Liga liga = new Liga();
 
     public static void main(String[] args) {
+        leerFichero();
+        System.out.println(liga.clasificacion());
+    }
 
-        Liga liga = new Liga();
-
+    private static void leerFichero(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../resources/ut5-tarea13-partidos.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("/Users/miguel/Library/Mobile Documents/com~apple~CloudDocs/1 DAW/Programación/PRACTICAS INTELLIJ/UT5/UT5_TAREA13/src/main/resources/ut5-tarea13-partidos.txt"));
 
             String linea = reader.readLine();
 
@@ -27,10 +30,11 @@ public class App {
                         Integer.parseInt(datos[2]),
                         Integer.parseInt(datos[3])
                 );
+                liga.agregarPartido(partido);
                 linea = reader.readLine();
-
-
             }
+
+            reader.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
